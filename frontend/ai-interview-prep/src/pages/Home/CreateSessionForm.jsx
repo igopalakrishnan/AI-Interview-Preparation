@@ -50,7 +50,7 @@ const CreateSessionForm = () => {
 
     try {
       //Call AI API to generate question
-      console.log("Sending request to:", API_PATHS.AI.GENERATE_QUESTIONS);
+      // console.log("Sending request to:", API_PATHS.AI.GENERATE_QUESTIONS);
       const aiResponse = await axiosInstance.post(
         API_PATHS.AI.GENERATE_QUESTIONS,
         {
@@ -61,7 +61,7 @@ const CreateSessionForm = () => {
         },
       );
 
-      console.log("Response:", aiResponse.data);
+      // console.log("Response:", aiResponse.data);
 
       // Always an array
       const safeQuestions = Array.isArray(aiResponse.data.questions)

@@ -99,7 +99,7 @@ const InterviewPrep = () => {
         API_PATHS.QUESTION.PIN(questionId),
       );
 
-      console.log(response);
+      // console.log(response);
 
       if (response.data && response.data.question) {
         // toast.success('Question Pinned successfully');

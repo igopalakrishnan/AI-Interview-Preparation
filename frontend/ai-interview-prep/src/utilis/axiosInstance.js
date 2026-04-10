@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
         //Redirect to login page
         window.location.href = "/";
       } else if (error.response.status === 500) {
-        console.log("Server error, Please try aggain later.");
+        // console.log("Server error, Please try aggain later.");
       }
     } else if (error.code === "ECONNABRTED") {
       console.error("Request timeout, Please try again.");

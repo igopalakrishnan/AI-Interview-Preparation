@@ -14,7 +14,7 @@ const QuestionCard = ({
   const [height, setHeight] = useState(0);
   const contentRef = useRef(null);
 
-  console.log("Final sanitized content:", sanitizeMarkdown(answer));
+  // console.log("Final sanitized content:", sanitizeMarkdown(answer));
 
   useEffect(() => {
     if (isExpanded) {
