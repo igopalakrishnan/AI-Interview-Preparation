@@ -18,7 +18,7 @@ const app = express();
 //Middleware to handle CORS
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "https://ai-interviews-preparation.netlify.app/",
+    origin: process.env.CLIENT_URL || "https://ai-interviews-preparation.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
