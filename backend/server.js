@@ -8,7 +8,10 @@ const authRoutes = require("./routes/authRoutes");
 const sessionRoutes = require("./routes/sessionRoutes");
 const questionRoutes = require("./routes/questionRoutes");
 const { protect } = require("./middleware/authMiddleware");
-const { generateConceptExplanation, generateInterviewQuestions } = require("./controllers/aiController");
+const {
+  generateConceptExplanation,
+  generateInterviewQuestions,
+} = require("./controllers/aiController");
 
 const app = express();
 
@@ -26,6 +29,12 @@ connectDB();
 
 //Middleware
 app.use(express.json());
+
+//checking route
+//home
+app.get("/home", (req, res) => {
+  res.send("<h1>AI-Interview-Preparation Application</h1>");
+});
 
 //Routes
 app.use("/api/auth", authRoutes);
