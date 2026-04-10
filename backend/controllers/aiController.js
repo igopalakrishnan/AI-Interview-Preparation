@@ -55,7 +55,7 @@ const generateInterviewQuestions = async (req, res) => {
     }
 
     const rawText = response.data.choices[0].message.content;
-    console.log("Raw:", rawText);
+    // console.log("Raw:", rawText);
 
     // Strip code fences, don’t escape newlines
     const cleanedText = rawText
@@ -141,7 +141,7 @@ const generateConceptExplanation = async (req, res) => {
     }
 
     const rawText = response.data.choices[0].message.content;
-    console.log("Raw model output:", rawText);
+    // console.log("Raw model output:", rawText);
 
     const cleanedText = rawText
       .replace(/^```json\s*/, "")

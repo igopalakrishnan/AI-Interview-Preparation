@@ -7,7 +7,7 @@ const Question = require("../models/Question");
 exports.addQuestionsToSession = async (req, res) => {
   try {
     const { sessionId, questions } = req.body;
-    console.log("req.body:", req.body);
+    // console.log("req.body:", req.body);
 
     if (!sessionId || !questions) {
       return res.status(400).json({ message: "Invalid input data" });
@@ -37,8 +37,8 @@ exports.addQuestionsToSession = async (req, res) => {
       })),
     );
 
-    console.log("Type of questions:", typeof questions);
-    console.log("Value of questions:", questions);
+    // console.log("Type of questions:", typeof questions);
+    // console.log("Value of questions:", questions);
 
     // Update session
     session.questions.push(...createdQuestions.map((q) => q._id));
