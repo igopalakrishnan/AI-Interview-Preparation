@@ -83,7 +83,7 @@ const SignUp = ({ setCurrentPage }) => {
       </p>
 
       <form onSubmit={handleSignUp}>
-        <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+        {/* <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} /> */}
 
         <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
           <Input
