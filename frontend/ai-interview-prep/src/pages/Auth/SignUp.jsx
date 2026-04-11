@@ -5,7 +5,7 @@ import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import { validateEmail } from "../../utilis/helper";
 import { UserContext } from "../../context/userContext";
 import axiosInstance from "../../utilis/axiosInstance";
-import { API_PATHS } from "../../utilis/apiPath";
+import { API_PATHS, BASE_URL } from "../../utilis/apiPath";
 import uploadImage from "../../utilis/uploadImage";
 
 const SignUp = ({ setCurrentPage }) => {
@@ -48,7 +48,9 @@ const SignUp = ({ setCurrentPage }) => {
       //Upload image if present
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
-        profileImageUrl = imgUploadRes.imageUrl || "";
+        profileImageUrl = imgUploadRes.url
+          ? `${BASE_URL}${imgUploadRes.url}`
+          : "";
       }
 
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
