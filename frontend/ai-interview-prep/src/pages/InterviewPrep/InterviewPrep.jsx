@@ -137,10 +137,10 @@ const InterviewPrep = () => {
         },
       );
 
-      if (response.data?.questions) {
+      if (response.data?.session?.questions) {
         setSessionData((prev) => ({
           ...prev,
-          questions: [...(prev?.questions || []), ...generatedQuestions],
+          questions: response.data.session.questions,
         }));
       }
     } catch (error) {
