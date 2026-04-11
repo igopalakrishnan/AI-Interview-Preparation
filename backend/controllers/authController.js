@@ -12,27 +12,41 @@ const generateToken = (userId) => {
 //@access Public
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, profileImageUrl } = req.body;
+    const { name, email, password } = req.body;
 
-    //Check if user already exists
+    // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    //Hash Password
+    // Hash Password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    //Create new user
+    // Build full image URL if file uploaded
+    let imageUrl = null;
+    if (req.file) {
+      const baseUrl =
+        process.env.NODE_ENV === "production"
+          ? "https://ai-interview-preparation-crmn.onrender.com"
+          : `${req.protocol}://${req.get("host")}`;
+
+      imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
+    } else if (req.body.profileImageUrl) {
+      // fallback if frontend sends full URL
+      imageUrl = req.body.profileImageUrl;
+    }
+
+    // Create new user with full URL
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
-      profileImageUrl,
+      profileImageUrl: imageUrl,
     });
 
-    //Return user data with JWT
+    // Return user data with JWT
     res.status(201).json({
       _id: user._id,
       name: user.name,
@@ -41,8 +55,8 @@ const registerUser = async (req, res) => {
       token: generateToken(user._id),
     });
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
     console.error(error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
