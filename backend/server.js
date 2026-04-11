@@ -48,8 +48,8 @@ app.use("/api/questions", questionRoutes);
 app.use("/api/ai/generate-questions", protect, generateInterviewQuestions);
 app.use("/api/ai/generate-explanation", protect, generateConceptExplanation);
 
-//Serve Uploads folder
-app.use("/uploads", express.static(path.join(__dirname, "uploads"), {}));
+// Serve static files from uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //Start Server
 const PORT = process.env.PORT || 8000;
