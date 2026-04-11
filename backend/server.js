@@ -49,6 +49,7 @@ app.use("/api/ai/generate-questions", protect, generateInterviewQuestions);
 app.use("/api/ai/generate-explanation", protect, generateConceptExplanation);
 
 // Serve static files from uploads folder
+// ✅ Fix for CommonJS: define __dirname
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //Start Server

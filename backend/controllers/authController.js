@@ -14,17 +14,14 @@ const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Hash Password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Build full image URL if file uploaded
     let imageUrl = null;
     if (req.file) {
       const baseUrl =
@@ -33,12 +30,8 @@ const registerUser = async (req, res) => {
           : `${req.protocol}://${req.get("host")}`;
 
       imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
-    } else if (req.body.profileImageUrl) {
-      // fallback if frontend sends full URL
-      imageUrl = req.body.profileImageUrl;
     }
 
-    // Create new user with full URL
     const user = await User.create({
       name,
       email,
@@ -46,7 +39,6 @@ const registerUser = async (req, res) => {
       profileImageUrl: imageUrl,
     });
 
-    // Return user data with JWT
     res.status(201).json({
       _id: user._id,
       name: user.name,
